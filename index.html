@@ -304,11 +304,13 @@
     transition: border-color 0.15s, background 0.15s;
     display: flex;
     flex-direction: column;
+    text-decoration: none;
   }
 
   .project-card:hover {
     border-color: #6e7681;
     background: var(--bg-card);
+    text-decoration: none;
   }
 
   .project-card-header {
@@ -374,7 +376,10 @@
     align-items: center;
     gap: 1rem;
     max-width: 380px;
+    text-decoration: none;
   }
+
+  .cert-card:hover { text-decoration: none; }
 
   .cert-icon {
     width: 44px;
@@ -478,7 +483,7 @@
   <div class="hero-eyebrow">Cybersecurity Engineer</div>
   <h1>Securing systems,<br><span>automating compliance.</span></h1>
   <p class="hero-sub">
-    I build and harden enterprise infrastructure — PKI hierarchies, STIG-compliant OS deployments, identity systems, and the automation that ties them together.
+    I build and harden enterprise infrastructure — OS configurations, network infrastructure, domain trust, compliance, and the automation that ties them together.
   </p>
   <div class="hero-actions">
     <a href="https://github.com/PiCodez314" class="btn btn-primary" target="_blank">
@@ -509,54 +514,56 @@
   <div class="skills-grid">
     <div class="skill-block">
       <div class="skill-block-icon">🔐</div>
-      <h3>Identity & PKI</h3>
-      <p>2-tier AD CS CA hierarchies, OCSP, smart card logon, certificate template lifecycle, cross-domain trust</p>
+      <h3>Identity & Access Control</h3>
+      <p>Active Directory, RBAC, MFA, SSO, least privilege enforcement, account lifecycle management across domain and local environments</p>
     </div>
     <div class="skill-block">
       <div class="skill-block-icon">📋</div>
       <h3>Compliance & Hardening</h3>
-      <p>STIG remediation, NIST RMF, FIPS 140-2, SCAP/ACAS vulnerability scanning, BitLocker encryption</p>
+      <p>STIG/CIS benchmark remediation, NIST RMF, FIPS 140-2/140-3, SCAP/ACAS scanning, BitLocker, SIEM integration</p>
     </div>
     <div class="skill-block">
       <div class="skill-block-icon">⚙️</div>
       <h3>Automation</h3>
-      <p>PowerShell for AD, IIS, and Windows Server lifecycle; Python for configuration management and deployment tooling with schema validation</p>
+      <p>PowerShell, Bash, Python — infrastructure-as-code, configuration management, CI/CD pipeline tooling, schema validation</p>
     </div>
     <div class="skill-block">
       <div class="skill-block-icon">🐧</div>
       <h3>Linux</h3>
-      <p>RHEL 8/9 kickstart provisioning, LUKS disk encryption, FIPS-mode deployment, domain integration via Kerberos</p>
+      <p>Redhat Enterprise Linux, Kickstart provisioning, SELinux, FIPS, FAPolicy, USBGuard, Encryption, Realm Management</p>
     </div>
     <div class="skill-block">
       <div class="skill-block-icon">🖥️</div>
       <h3>Virtualization</h3>
-      <p>VMware ESXi, Hyper-V, VMware Workstation — VM lifecycle, networking, and cluster-level design</p>
+      <p>Hyper-V, VMware ESXi/Workstation, VM lifecycle management, virtual networking, cluster design</p>
     </div>
     <div class="skill-block">
       <div class="skill-block-icon">📡</div>
-      <h3>Network & SIEM</h3>
-      <p>SolarWinds SIEM, RADIUS/NPAS for Cisco/Ruckus/Dell switches, Cisco EWC wireless, VLAN design</p>
+      <h3>Network</h3>
+      <p>RADIUS/NPS AAA, 802.1X, Cisco/Ruckus/Dell switch management, Cisco EWC wireless, VLAN segmentation</p>
     </div>
   </div>
 
   <div class="tags">
+    <span class="tag">Windows Server 2022/2025</span>
+    <span class="tag">Redhat Enterprise Linux 8/9/10</span>
+    <span class="tag">Active Directory</span>
+    <span class="tag">Password Management</span>
+    <span class="tag">Certificate Services</span>
+    <span class="tag">Smart Cards</span>
+    <span class="tag">Group Policy</span>
+    <span class="tag">Web Services</span>
+    <span class="tag">Update Services</span>
+    <span class="tag">Encryption</span>
+    <span class="tag">FIPS 140-2/3</span>
+    <span class="tag">Ansible</span>
     <span class="tag">PowerShell</span>
     <span class="tag">Python</span>
-    <span class="tag">Windows Server 2022</span>
-    <span class="tag">RHEL 8/9</span>
-    <span class="tag">Active Directory</span>
-    <span class="tag">AD CS</span>
-    <span class="tag">IIS</span>
-    <span class="tag">Group Policy</span>
-    <span class="tag">VMware ESXi</span>
     <span class="tag">Hyper-V</span>
-    <span class="tag">Trellix ePO</span>
-    <span class="tag">WSUS</span>
+    <span class="tag">VMware</span>
     <span class="tag">ACAS</span>
+    <span class="tag">Trellix ePO</span>
     <span class="tag">SolarWinds</span>
-    <span class="tag">BitLocker</span>
-    <span class="tag">LAPS</span>
-    <span class="tag">FIPS 140-2</span>
     <span class="tag">NIST RMF</span>
     <span class="tag">STIG</span>
   </div>
@@ -569,50 +576,17 @@
   </div>
 
   <div class="projects-grid">
-    <div class="project-card">
+    <a class="project-card" href="https://github.com/PiCodez314/CyberCTL" target="_blank" rel="noopener noreferrer">
       <div class="project-card-header">
-        <h3>rhel-kickstart-automation</h3>
+        <h3>CyberCTL</h3>
         <span class="wip-badge">In progress</span>
       </div>
-      <p>Fully automated RHEL 8/9 OS provisioning with FIPS mode, LUKS encryption, STIG baselines, and domain join via Kickstart.</p>
+      <p>Automated Ansible playbook runner for security automation and compliance.</p>
       <div class="project-langs">
         <span class="lang-badge"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
         <span class="lang-badge"><span class="lang-dot" style="background:#89e051"></span>Shell</span>
       </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-card-header">
-        <h3>adcs-pki-toolkit</h3>
-        <span class="wip-badge">In progress</span>
-      </div>
-      <p>PowerShell tooling for AD CS management — certificate template export/import across domains, OCSP configuration, and NTAuth store management.</p>
-      <div class="project-langs">
-        <span class="lang-badge"><span class="lang-dot" style="background:#012456"></span>PowerShell</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-card-header">
-        <h3>winserver-automation</h3>
-        <span class="wip-badge">In progress</span>
-      </div>
-      <p>Windows Server lifecycle automation — DC demotion/repromotion, BitLocker Network Unlock GPO design, and LAPS deployment scripts.</p>
-      <div class="project-langs">
-        <span class="lang-badge"><span class="lang-dot" style="background:#012456"></span>PowerShell</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-card-header">
-        <h3>iis-config-package</h3>
-        <span class="wip-badge">In progress</span>
-      </div>
-      <p>Python-based IIS configuration management with XSD schema validation, multi-SAN certificate handling, virtual directory deployment, and STIG-compliant site bindings.</p>
-      <div class="project-langs">
-        <span class="lang-badge"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-      </div>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -622,13 +596,13 @@
     <span class="section-line"></span>
   </div>
 
-  <div class="cert-card">
+  <a class="cert-card" href="https://www.credly.com/badges/ab762799-85aa-49e0-b7d4-fe421062b038/" target="_blank" rel="noopener noreferrer">
     <div class="cert-icon">🛡️</div>
     <div>
       <div class="cert-name">CompTIA Security+</div>
       <div class="cert-issuer">CompTIA</div>
     </div>
-  </div>
+  </a>
 </section>
 
 <section id="contact">
