@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doug | Cybersecurity Engineer</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1117;
+    --bg-surface: #161b22;
+    --bg-card: #1c2128;
+    --border: #30363d;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #6e7681;
+    --accent: #1f6feb;
+    --accent-glow: rgba(31, 111, 235, 0.12);
+    --accent-text: #58a6ff;
+    --green: #3fb950;
+    --green-bg: rgba(63, 185, 80, 0.08);
+    --amber: #d29922;
+    --amber-bg: rgba(210, 153, 34, 0.08);
+    --tag-bg: rgba(31, 111, 235, 0.1);
+    --tag-text: #58a6ff;
+    --tag-border: rgba(31, 111, 235, 0.3);
+    --mono: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  a { color: var(--accent-text); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13, 17, 23, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent-text);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text-secondary);
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+  /* HERO */
+  .hero {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 6rem 2rem 5rem;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent-text);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent-text);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 span {
+    color: var(--accent-text);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .btn-primary:hover { background: #388bfd; border-color: #388bfd; text-decoration: none; }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border);
+  }
+
+  .btn-secondary:hover { background: var(--bg-surface); border-color: #6e7681; text-decoration: none; }
+
+  /* STATUS BAR */
+  .status-bar {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* SKILLS GRID */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .skill-block {
+    background: var(--bg-surface);
+    padding: 1.5rem;
+    transition: background 0.15s;
+  }
+
+  .skill-block:hover { background: var(--bg-card); }
+
+  .skill-block-icon {
+    font-size: 20px;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-block h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .skill-block p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2rem;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border: 1px solid var(--tag-border);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .project-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: border-color 0.15s, background 0.15s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card:hover {
+    border-color: #6e7681;
+    background: var(--bg-card);
+  }
+
+  .project-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-text);
+  }
+
+  .project-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    flex: 1;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .project-langs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .lang-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .lang-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .wip-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: var(--amber-bg);
+    color: var(--amber);
+    border: 1px solid rgba(210, 153, 34, 0.3);
+    white-space: nowrap;
+  }
+
+  /* CERT */
+  .cert-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 380px;
+  }
+
+  .cert-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: rgba(255, 100, 0, 0.12);
+    border: 1px solid rgba(255, 100, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .cert-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .cert-issuer {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .contact-link:hover {
+    border-color: #6e7681;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    text-decoration: none;
+  }
+
+  .contact-link svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 900px;
+    margin: 0 auto 5rem;
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero { padding: 4rem 1.25rem 3rem; }
+    section { padding: 0 1.25rem 3.5rem; }
+    .status-bar { padding: 0 1.25rem 3.5rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">~/PiCodez314</span>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Cybersecurity Engineer</div>
+  <h1>Securing systems,<br><span>automating compliance.</span></h1>
+  <p class="hero-sub">
+    I build and harden enterprise infrastructure — PKI hierarchies, STIG-compliant OS deployments, identity systems, and the automation that ties them together.
+  </p>
+  <div class="hero-actions">
+    <a href="https://github.com/PiCodez314" class="btn btn-primary" target="_blank">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View GitHub
+    </a>
+    <a href="mailto:picodez314@gmail.com" class="btn btn-secondary">
+      Get in touch
+    </a>
+  </div>
+</div>
+
+<div class="status-bar">
+  <span class="status-item">
+    <span class="status-dot"></span>
+    Open to opportunities
+  </span>
+  <span class="status-item" style="color: var(--text-muted);">📍 Tampa Bay, FL</span>
+  <span class="status-item" style="color: var(--text-muted);">🔒 CompTIA Security+</span>
+</div>
+
+<section id="skills">
+  <div class="section-header">
+    <span class="section-label">Expertise</span>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-block">
+      <div class="skill-block-icon">🔐</div>
+      <h3>Identity & PKI</h3>
+      <p>2-tier AD CS CA hierarchies, OCSP, smart card logon, certificate template lifecycle, cross-domain trust</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-icon">📋</div>
+      <h3>Compliance & Hardening</h3>
+      <p>STIG remediation, NIST RMF, FIPS 140-2, SCAP/ACAS vulnerability scanning, BitLocker encryption</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-icon">⚙️</div>
+      <h3>Automation</h3>
+      <p>PowerShell for AD, IIS, and Windows Server lifecycle; Python for configuration management and deployment tooling with schema validation</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-icon">🐧</div>
+      <h3>Linux</h3>
+      <p>RHEL 8/9 kickstart provisioning, LUKS disk encryption, FIPS-mode deployment, domain integration via Kerberos</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-icon">🖥️</div>
+      <h3>Virtualization</h3>
+      <p>VMware ESXi, Hyper-V, VMware Workstation — VM lifecycle, networking, and cluster-level design</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-block-icon">📡</div>
+      <h3>Network & SIEM</h3>
+      <p>SolarWinds SIEM, RADIUS/NPAS for Cisco/Ruckus/Dell switches, Cisco EWC wireless, VLAN design</p>
+    </div>
+  </div>
+
+  <div class="tags">
+    <span class="tag">PowerShell</span>
+    <span class="tag">Python</span>
+    <span class="tag">Windows Server 2022</span>
+    <span class="tag">RHEL 8/9</span>
+    <span class="tag">Active Directory</span>
+    <span class="tag">AD CS</span>
+    <span class="tag">IIS</span>
+    <span class="tag">Group Policy</span>
+    <span class="tag">VMware ESXi</span>
+    <span class="tag">Hyper-V</span>
+    <span class="tag">Trellix ePO</span>
+    <span class="tag">WSUS</span>
+    <span class="tag">ACAS</span>
+    <span class="tag">SolarWinds</span>
+    <span class="tag">BitLocker</span>
+    <span class="tag">LAPS</span>
+    <span class="tag">FIPS 140-2</span>
+    <span class="tag">NIST RMF</span>
+    <span class="tag">STIG</span>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-header">
+    <span class="section-label">Projects</span>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-card-header">
+        <h3>rhel-kickstart-automation</h3>
+        <span class="wip-badge">In progress</span>
+      </div>
+      <p>Fully automated RHEL 8/9 OS provisioning with FIPS mode, LUKS encryption, STIG baselines, and domain join via Kickstart.</p>
+      <div class="project-langs">
+        <span class="lang-badge"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+        <span class="lang-badge"><span class="lang-dot" style="background:#89e051"></span>Shell</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-header">
+        <h3>adcs-pki-toolkit</h3>
+        <span class="wip-badge">In progress</span>
+      </div>
+      <p>PowerShell tooling for AD CS management — certificate template export/import across domains, OCSP configuration, and NTAuth store management.</p>
+      <div class="project-langs">
+        <span class="lang-badge"><span class="lang-dot" style="background:#012456"></span>PowerShell</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-header">
+        <h3>winserver-automation</h3>
+        <span class="wip-badge">In progress</span>
+      </div>
+      <p>Windows Server lifecycle automation — DC demotion/repromotion, BitLocker Network Unlock GPO design, and LAPS deployment scripts.</p>
+      <div class="project-langs">
+        <span class="lang-badge"><span class="lang-dot" style="background:#012456"></span>PowerShell</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-header">
+        <h3>iis-config-package</h3>
+        <span class="wip-badge">In progress</span>
+      </div>
+      <p>Python-based IIS configuration management with XSD schema validation, multi-SAN certificate handling, virtual directory deployment, and STIG-compliant site bindings.</p>
+      <div class="project-langs">
+        <span class="lang-badge"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="section-header">
+    <span class="section-label">Certifications</span>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="cert-card">
+    <div class="cert-icon">🛡️</div>
+    <div>
+      <div class="cert-name">CompTIA Security+</div>
+      <div class="cert-issuer">CompTIA</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header">
+    <span class="section-label">Contact</span>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="contact-grid">
+    <a href="https://github.com/PiCodez314" class="contact-link" target="_blank">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+    <a href="mailto:picodez314@gmail.com" class="contact-link">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 2A1.75 1.75 0 000 3.75v.736a.75.75 0 000 .027V12.25C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0016 12.25V3.75A1.75 1.75 0 0014.25 2H1.75zM1.5 4.132l5.793 3.555a1.5 1.5 0 001.414 0L14.5 4.132V12.25a.25.25 0 01-.25.25H1.75a.25.25 0 01-.25-.25V4.132zm1.212-1.63h10.576L8 5.744 2.712 2.502z"/></svg>
+      picodez314@gmail.com
+    </a>
+    <a href="https://twitter.com/PiCodez314" class="contact-link" target="_blank">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M9.294 7.298L14.437 1.5H13.24L8.762 6.53 5.198 1.5H1.5l5.398 7.85L1.5 15.5h1.197l4.72-5.487 3.772 5.487H14.5L9.294 7.298zM7.993 9.217l-.547-.783L3.12 2.413H4.66l3.513 5.024.547.783 4.566 6.527h-1.54l-3.753-5.53z"/></svg>
+      @PiCodez314
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span style="color: var(--text-muted);">PiCodez314 · Built with GitHub Pages</span>
+</footer>
+
+</body>
+</html>
